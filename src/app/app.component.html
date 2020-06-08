@@ -1,14 +1,33 @@
-<div class="container">
+<div class="container col-12 p-4">
   <div class="row">
-    <div class="col-4">
-      <div class="jumbotron">
-        tabs
+    <div class="col-3">
+      <div class="jumbotron ">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+           <a *ngFor="let weather of weathers"
+              [attr.aria-selected]="currentTab == weather.city ? true : false"
+              [ngClass]="{'active' : currentTab == weather.city}"
+              (click)="changeTab(weather.city)" class="nav-link" data-toggle="pill" href="#{{weather.city}}"
+              id="{{weather.city}}-tab" role="tab"
+              mdbBtn color="light-blue" mdbWavesEffect
+           >{{weather.city}} </a>
+            <app-modal></app-modal>
+        </div>
+
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-9 pr-5">
       <div class="jumbotron">
-        weather contents
+        <div class="tab-content" id="tabContent">
+          <div *ngFor="let weather of weathers"
+               [ngClass]="{'show active' : currentTab == weather.city}"
+               class="tab-pane fade"
+               id="{{weather.city}}"
+               role="tabpanel"><app-tab-content [city]="weather.city" (onRemove)="onDeleteTab($event)"></app-tab-content></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+

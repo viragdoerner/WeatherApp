@@ -7,10 +7,14 @@ import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
+import { TabContentComponent } from './tab-content/tab-content.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TabContentComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
