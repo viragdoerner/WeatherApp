@@ -15,10 +15,22 @@
         <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Add item</h4>
+        <h4 class="modal-title w-100" id="myModalLabel">New city</h4>
       </div>
       <div class="modal-body">
+        <!-- Default form login -->
+        <form class="text-center p-5" #modalForm="ngForm">
+          <div class="md-form">
+            <input mdbInput type="text" id="name" class="form-control" [(ngModel)]="form.name" name="name">
+            <label for="name" class="">Name of the city</label>
+          </div>
 
+        </form>
+        <!-- Default form login -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" mdbBtn [ngClass]="{'disabled':form.city==null}" color="primary" type="submit" class="relative waves-light" mdbWavesEffect (click)="add(modalForm, basicModal)">Add</button>
       </div>
     </div>
   </div>
