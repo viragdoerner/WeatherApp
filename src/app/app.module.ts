@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
-import { TabContentComponent } from './tab-content/tab-content.component';
-import { ModalComponent } from './modal/modal.component';
+import { TabContentComponent } from './components/tab-content/tab-content.component';
+import { ModalComponent } from './components/modal/modal.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ModalComponent } from './modal/modal.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,

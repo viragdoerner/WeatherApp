@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Weather_data} from '../model/weather_data';
+import {Weather_data} from './model/weather_data';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,26 +12,44 @@ export class AppComponent implements OnInit {
   weathers: Weather_data[] = [];
   currentTab = 'Budapest';
 
+  constructor( private apiService: ApiService) { }
   ngOnInit(): void {
-    for (let i = 0; i < 5; i++) {
-      const w: Weather_data = {
-        city: `${i}City`,
-        description: `${i}Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. ` +
-          'It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together.'
-      };
+    /*for (let i = 0; i < 5; i++) {
+      const w: Weather_data = new Weather_data(
+        `${i}City`,
+        `${i} weather data about this city`);
       this.weathers.push(w);
-    }
+    }*/
+    this.getCurrentWeatherOf('Budapest');
   }
   changeTab(tab: string) {
       this.currentTab = tab;
   }
 
   onDeleteTab(city: string) {
-    console.log("delete tab 2");
     this.weathers = this.weathers.filter(rowObj => rowObj.city !== city);
   }
 
-  addTab() {
+  onAddTab(cityName: string) {
+    // TODO : API hívás, város adatainak lekérése
+    // TODO : ha nem létező város, akkor hibaüzenetet küldeni
+    // TODO : ha létezik új város objektum létrehozása
+    //és mentése
+    this.changeTab(cityName);
+    //this.weathers.push(new Weather_data(cityName, `data about this city: ${cityName}`, ));
+  }
 
+  getCurrentWeatherOf(city: string) {
+    this.apiService.getCurrentWeather(city).subscribe(
+      res => {
+        console.log(res);
+        const weather: Weather_data = this.apiService.getWeatherData(res);
+        console.log(weather);
+        this.weathers.push(weather);
+      },
+      err => {
+        alert(err.error.message);
+      }
+    );
   }
 }

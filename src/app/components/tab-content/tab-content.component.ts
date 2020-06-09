@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Weather_data} from '../../model/weather_data';
 
 @Component({
   selector: 'app-tab-content',
@@ -8,13 +9,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class TabContentComponent implements OnInit {
 
   constructor() { }
-  @Input() city: string;
+  @Input() weather: Weather_data;
   @Output() onRemove = new EventEmitter<string>();
   ngOnInit(): void {
   }
 
   delete() {
-    console.log("delete tab");
-    this.onRemove.emit(this.city);
+    this.onRemove.emit(this.weather.city);
   }
 }

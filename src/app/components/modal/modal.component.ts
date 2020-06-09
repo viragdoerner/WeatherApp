@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
@@ -8,13 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ModalComponent implements OnInit {
   form: any = {};
   constructor() { }
-
+  @Output() cityName: string;
+  @Output() onAddTab = new EventEmitter<string>();
   ngOnInit(): void {
   }
 
   add(modalForm: NgForm, basicModal: any) {
-    //megnezni hogy letezo varosnév-e: vagy itt vagy az app-ben
-    //tovabbitani a nevet az app-nek
+    // tovabbitani a nevet az app-nek
+    this.onAddTab.emit(this.form.city);
+    // modal bezárása, form ürítése
     basicModal.hide();
     modalForm.reset();
   }
