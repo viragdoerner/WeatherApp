@@ -3,5 +3,61 @@
     <i class="fas fa-times fa-2x"></i>
   </a>
 </div>
-{{weather.description}}
+
+
+
+<div class="row justify-content-center">
+  <div class="data-table col-sm-12 col-md-12 col-lg-8">
+    <table mdbTable small = true hover="true" >
+      <tbody>
+      <tr class="table-head">
+        <th scope="row">Current weather:</th>
+        <td>{{weather.description}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Temperature:</th>
+        <td>{{weather.temperature}} °C</td>
+      </tr>
+      <tr>
+        <th scope="row">Humidity:</th>
+        <td>{{weather.humidity}}%</td>
+      </tr>
+      <tr>
+        <th scope="row">Pressure:</th>
+        <td>{{weather.air}} hPa</td>
+      </tr>
+      <tr>
+        <th scope="row">Wind direction:</th>
+        <td>{{weather.windDir}}°</td>
+      </tr>
+      <tr>
+        <th scope="row">Wind speed:</th>
+        <td>{{weather.windSpeed}} m/s</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row justify-content-center pt-5">
+  <div class="data-table col-sm-12 col-md-12 col-lg-8">
+    <table mdbTable >
+      <tbody>
+      <tr >
+        <th scope="row">5 days forecast:</th>
+        <td>{{weather.forecast[0]}}</td>
+        <td>{{weather.forecast[1]}}</td>
+        <td>{{weather.forecast[2]}}</td>
+        <td>{{weather.forecast[3]}}</td>
+        <td>{{weather.forecast[4]}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
 

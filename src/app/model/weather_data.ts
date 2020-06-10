@@ -1,5 +1,5 @@
 export class Weather_data {
-  constructor(c: string = null, d: string = null, t: number = null, h: number = null, a: number = null, wd: number = null, ws: number = null) {
+  constructor(c: string, d: string, t: number, h: number, a: number, wd: number, ws: number) {
     this.city = c;
     this.description = d;
     this.temperature = t;
@@ -7,8 +7,11 @@ export class Weather_data {
     this.air = a;
     this.windDir = wd;
     this.windSpeed = ws;
+    this.forecast = null;
   }
-
+  public set5DayForecast(f: number[]) {
+    this.forecast = f;
+  }
   city: string;
   description: string;
   temperature: number;
@@ -16,4 +19,5 @@ export class Weather_data {
   air: number;
   windDir: number;
   windSpeed: number;
+  forecast: number[];
 }

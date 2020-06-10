@@ -11,6 +11,7 @@ export class TabContentComponent implements OnInit {
   constructor() { }
   @Input() weather: Weather_data;
   @Output() onRemove = new EventEmitter<string>();
+
   ngOnInit(): void {
   }
 

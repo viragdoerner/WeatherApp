@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
       this.weathers.push(w);
     }*/
     this.getCurrentWeatherOf('Budapest');
+    this.getForecastOf('Budapest');
   }
   changeTab(tab: string) {
       this.currentTab = tab;
@@ -28,6 +29,9 @@ export class AppComponent implements OnInit {
 
   onDeleteTab(city: string) {
     this.weathers = this.weathers.filter(rowObj => rowObj.city !== city);
+    if (this.weathers.length !== 0) {
+    this.changeTab(this.weathers[0].city);
+    }
   }
 
   onAddTab(cityName: string) {
@@ -37,15 +41,28 @@ export class AppComponent implements OnInit {
     //és mentése
     this.changeTab(cityName);
     //this.weathers.push(new Weather_data(cityName, `data about this city: ${cityName}`, ));
+    this.getCurrentWeatherOf(cityName);
+    this.getForecastOf(cityName);
   }
 
   getCurrentWeatherOf(city: string) {
     this.apiService.getCurrentWeather(city).subscribe(
       res => {
-        console.log(res);
         const weather: Weather_data = this.apiService.getWeatherData(res);
-        console.log(weather);
         this.weathers.push(weather);
+      },
+      err => {
+        alert(err.error.message);
+      }
+    );
+  }
+
+  private getForecastOf(city: string) {
+    this.apiService.getForecast(city).subscribe(
+      res => {
+        const forecast: number[] = this.apiService.setForecastData(res)
+        let w: Weather_data = this.weathers[this.weathers.length - 1];
+        w.set5DayForecast(forecast);
       },
       err => {
         alert(err.error.message);

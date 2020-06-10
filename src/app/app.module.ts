@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TabContentComponent } from './components/tab-content/tab-content.component';
 import { ModalComponent } from './components/modal/modal.component';
 import {HttpClientModule} from '@angular/common/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
   ],
