@@ -14,14 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor( private apiService: ApiService) { }
   ngOnInit(): void {
-    /*for (let i = 0; i < 5; i++) {
-      const w: Weather_data = new Weather_data(
-        `${i}City`,
-        `${i} weather data about this city`);
-      this.weathers.push(w);
-    }*/
-    this.getCurrentWeatherOf('Budapest');
-    this.getForecastOf('Budapest');
+    this.getWeatherOf('Budapest');
   }
   changeTab(tab: string) {
       this.currentTab = tab;
@@ -35,14 +28,11 @@ export class AppComponent implements OnInit {
   }
 
   onAddTab(cityName: string) {
-    // TODO : API hívás, város adatainak lekérése
     // TODO : ha nem létező város, akkor hibaüzenetet küldeni
-    // TODO : ha létezik új város objektum létrehozása
     //és mentése
     this.changeTab(cityName);
     //this.weathers.push(new Weather_data(cityName, `data about this city: ${cityName}`, ));
-    this.getCurrentWeatherOf(cityName);
-    this.getForecastOf(cityName);
+    this.getWeatherOf(cityName);
   }
 
   getCurrentWeatherOf(city: string) {
@@ -52,7 +42,8 @@ export class AppComponent implements OnInit {
         this.weathers.push(weather);
       },
       err => {
-        alert(err.error.message);
+        alert("Unable to load current weather data of city: " + city  + ". Error message is: " + err.error.message);
+        this.changeTab(this.weathers[0].city);
       }
     );
   }
@@ -65,8 +56,19 @@ export class AppComponent implements OnInit {
         w.set5DayForecast(forecast);
       },
       err => {
-        alert(err.error.message);
+        alert("Unable to load five day forecast of city: " + city  + ". Error message is: " + err.error.message);
+        this.changeTab(this.weathers[0].city);
       }
     );
   }
+
+  private getWeatherOf(city: string) {
+    this.getCurrentWeatherOf(city);
+    this.getForecastOf(city);
+  }
+
+  // private getWeatherOf(city: string) {
+  //   const weather: Weather_data = this.apiService.getWeatherOf(res);
+  //   this.weathers.push(weather);
+  // }
 }

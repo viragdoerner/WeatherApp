@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Weather_data} from '../model/weather_data';
-import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getCurrentWeather(city: string) {
+  getCurrentWeather(city: string): Observable<Object> {
     return this.http.get(this.BASE_URL_CURRENT_1 + city + this.BASE_URL_CURRENT_2);
   }
 
@@ -30,7 +30,7 @@ export class ApiService {
       jsonObject.wind.speed);
     return w;
   }
-  getForecast(city: string) {
+  getForecast(city: string): Observable<Object> {
     return this.http.get(this.BASE_URL_FORECAST_1 + city + this.BASE_URL_FORECAST_2);
   }
 
@@ -41,4 +41,11 @@ export class ApiService {
     }
     return forecast;
   }
+
+  // getWeatherOf(city: string): Weather_data {
+  //   let w = this.getWeatherData(this.getCurrentWeather(city));
+  //   const forecast = this.setForecastData(this.getForecast(city));
+  //   w.set5DayForecast(forecast);
+  //   return w;
+  // }
 }
