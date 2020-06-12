@@ -1,1 +1,30 @@
-<p>nav-bar works!</p>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Weather-App</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <div mdbDropdownToggle>
+              <mdb-icon fas icon="user" ></mdb-icon>
+              <a  class="nav-item"> {{username}} </a>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item"  (click)="Logout()">Sign out</a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  username: string = 'user name';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  Logout() {
+
+  }
 }

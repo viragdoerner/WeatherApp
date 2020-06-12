@@ -1,3 +1,5 @@
+<app-nav-bar></app-nav-bar>
+
 <div class="container col-8 p-4">
   <div class="row">
     <div class="col-3">
@@ -6,9 +8,9 @@
           <a *ngFor="let weather of weathers"
              [attr.aria-selected]="currentTab == weather.city ? true : false"
              [ngClass]="{'active' : currentTab == weather.city}"
-             (click)="changeTab(weather.city)" class="nav-link" data-toggle="pill" href="#{{weather.city}}"
+             (click)="changeTab(weather.city)" class="nav-link" data-toggle="pill" href="home#{{weather.city}}"
              id="{{weather.city}}-tab" role="tab"
-             mdbBtn color="light-blue" mdbWavesEffect
+             mdbBtn color="cyan" mdbWavesEffect
           >{{weather.city}} </a>
           <app-modal (onAddTab)="onAddTab($event)"></app-modal>
         </div>
