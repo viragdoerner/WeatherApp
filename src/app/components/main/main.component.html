@@ -10,7 +10,7 @@
              [ngClass]="{'active' : currentTab == weather.city}"
              (click)="changeTab(weather.city)" class="nav-link" data-toggle="pill" href="home#{{weather.city}}"
              id="{{weather.city}}-tab" role="tab"
-             mdbBtn color="cyan" mdbWavesEffect
+             mdbBtn color="light-green" mdbWavesEffect
           >{{weather.city}} </a>
           <app-modal (onAddTab)="onAddTab($event)"></app-modal>
         </div>
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let err of weathers" class="row">
+  <div  class="row">
     <div *ngIf="error.active" class="alert alert-danger col-6 offset-4" role="alert">
       Unable to load weather data of city: {{error.city}}. Error message is: {{error.errormessage}}
     </div>

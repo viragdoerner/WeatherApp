@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {LoginInfo} from '../../model/loginInfo';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,38 +10,25 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form: any = {};
-  isLoginFailed = false;
-  errorMessage = '';
-  //private loginInfo: AuthLoginInfo;
+  successfulLogin = true;
+  private loginInfo: LoginInfo;
 
   constructor(
-    //private authService: AuthService,
-    //private tokenStorage: TokenStorageService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit() {
   }
   onSubmit() {
-    /*this.loginInfo = new AuthLoginInfo(
+    this.loginInfo = new LoginInfo(
       this.form.username,
       this.form.password
     );
-    this.authService.attemptAuth(this.loginInfo).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUsername(data.username);
-        this.tokenStorage.saveAuthority(data.authorities);
-
-        this.isLoginFailed = false;
-        console.log('Sikeresen bejelentkeztel ' + this.tokenStorage.getUsername() );
-        this.router.navigateByUrl('/home');
-      },
-      (error) => {
-        this.isLoginFailed = true;
-        this.errorMessage = 'Invalid username or password';
-
-      }
-    );*/
+    this.successfulLogin = this.authService.login(this.loginInfo);
+    if (this.successfulLogin){
+      console.log('Sikeresen bejelentkeztel ' + this.form.username );
+      this.router.navigateByUrl('/home');
+    }
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Weather_data} from '../../model/weather_data';
 import {ErrorAlert} from '../../model/errorAlert';
 import {ApiService} from '../../services/api.service';
+import {AuthService} from '../../services/auth.service';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -10,20 +12,30 @@ import {ApiService} from '../../services/api.service';
 })
 export class MainComponent implements OnInit {
   weathers: Weather_data[] = [];
-  currentTab = 'Budapest';
+  currentTab: string;
+  username: string;
   error: ErrorAlert = new ErrorAlert();
 
 
-  constructor( private apiService: ApiService) { }
+  constructor( private apiService: ApiService, private authService: AuthService, private storageService: StorageService) { }
   ngOnInit(): void {
-    this.getWeatherOf('Budapest');
-}
+    this.username = this.authService.getCurrentUser();
+    const cities = this.storageService.getCitiesOf(this.username);
+    cities.forEach( (element) => {
+      this.getWeatherOf(element);
+    });
+    if (cities.length !== 0) {
+      this.changeTab(cities[0]);
+    }
+
+  }
   changeTab(tab: string) {
     this.currentTab = tab;
   }
 
   onDeleteTab(city: string) {
     this.weathers = this.weathers.filter(rowObj => rowObj.city !== city);
+    this.storageService.deleteCity(this.username, city);
     if (this.weathers.length !== 0) {
       this.changeTab(this.weathers[0].city);
     }
@@ -31,6 +43,7 @@ export class MainComponent implements OnInit {
 
   onAddTab(cityName: string) {
     this.changeTab(cityName);
+    this.storageService.addCity(this.username, cityName);
     //this.weathers.push(new Weather_data(cityName, `data about this city: ${cityName}`, ));
     this.getWeatherOf(cityName);
   }
@@ -52,11 +65,11 @@ export class MainComponent implements OnInit {
     );
   }
 
-private hideError() {
-    this.error.active = false;
+  private hideError() {
+      this.error.active = false;
   }
 
-private getForecastOf(city: string) {
+  private getForecastOf(city: string) {
     this.apiService.getForecast(city).subscribe(
       res => {
         const forecast: number[] = this.apiService.setForecastData(res)
@@ -70,14 +83,10 @@ private getForecastOf(city: string) {
     );
   }
 
-private getWeatherOf(city: string) {
+  private getWeatherOf(city: string) {
+    console.log('get weather');
     this.getCurrentWeatherOf(city);
     this.getForecastOf(city);
   }
-
-  // private getWeatherOf(city: string) {
-  //   const weather: Weather_data = this.apiService.getWeatherOf(res);
-  //   this.weathers.push(weather);
-  // }
 }
 

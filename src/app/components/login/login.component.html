@@ -9,7 +9,7 @@
           <input type="text" class="form-control" id="username"
                  required
                  [(ngModel)]="form.username" name="username"
-                 [ngClass]="{'failed': isLoginFailed }">
+                 [ngClass]="{'failed': !successfulLogin }">
 
         </div>
 
@@ -18,13 +18,13 @@
           <input type="password" class="form-control" id="password"
                  required
                  [(ngModel)]="form.password" name="password"
-                 [ngClass]="{'failed': isLoginFailed }">
+                 [ngClass]="{'failed': !successfulLogin }">
         </div>
 
         <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
-        <div [hidden]="!isLoginFailed"
+        <div [hidden]="successfulLogin"
              class="alert alert-danger mt-3">
-          {{errorMessage}}
+          Wrong password for existing username.
         </div>
 
       </form>
