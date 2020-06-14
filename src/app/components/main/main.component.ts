@@ -91,7 +91,6 @@ export class MainComponent implements OnInit {
   }
 
   private getWeatherOf(city: string) {
-    console.log('get weather');
     this.getCurrentWeatherOf(city);
     this.getForecastOf(city);
   }

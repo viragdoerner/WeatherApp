@@ -7,7 +7,7 @@ import {Weather_data} from '../../model/weather_data';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit {
-  @Input() data: number[];
+  @Input('data') data: number[];
   days: string[] = [];
   multi =  [
     {
@@ -56,7 +56,6 @@ export class LineChartComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
-    console.log(this.data);
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     for (let i = 0; i < 5 ; i++) {
       const today = new Date();

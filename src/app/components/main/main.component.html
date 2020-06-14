@@ -24,7 +24,7 @@
                [ngClass]="{'show active' : currentTab == weather.city}"
                class="tab-pane fade"
                id="{{weather.city}}"
-               role="tabpanel"><app-tab-content [weather]="weather" (onRemove)="onDeleteTab($event)"></app-tab-content></div>
+               role="tabpanel"><app-tab-content [weather]='weather' (onRemove)="onDeleteTab($event)"></app-tab-content></div>
         </div>
       </div>
     </div>

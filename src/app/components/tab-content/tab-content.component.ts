@@ -9,11 +9,10 @@ import {Weather_data} from '../../model/weather_data';
 export class TabContentComponent implements OnInit {
 
   constructor() { }
-  @Input() weather: Weather_data;
+  @Input('weather') weather: Weather_data;
   @Output() onRemove = new EventEmitter<string>();
 
   ngOnInit(): void {
-    console.log(this.weather);
   }
 
   delete() {
