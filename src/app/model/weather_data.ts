@@ -7,7 +7,7 @@ export class Weather_data {
     this.air = a;
     this.windDir = wd;
     this.windSpeed = ws;
-    this.forecast = [];
+    this.forecast = null;
   }
   public set5DayForecast(f: number[]) {
     this.forecast = f;

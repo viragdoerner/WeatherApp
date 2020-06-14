@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Weather_data} from '../model/weather_data';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Weather_forecast} from '../model/weather_forecast';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class ApiService {
       jsonObject.wind.speed);
     return w;
   }
-  getForecast(city: string): Observable<Object> {
+  getForecast(city: string) {
     return this.http.get(this.BASE_URL_FORECAST_1 + city + this.BASE_URL_FORECAST_2);
   }
 

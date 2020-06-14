@@ -66,7 +66,7 @@ export class MainComponent implements OnInit {
   }
 
   private hideError() {
-      this.error.active = false;
+    this.error.active = false;
   }
 
   private getForecastOf(city: string) {

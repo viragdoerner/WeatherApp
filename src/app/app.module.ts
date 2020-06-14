@@ -15,7 +15,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MainComponent } from './components/main/main.component';
 import {AppRoutingModule} from './app-routing.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { LineChartComponent } from './line-chart/line-chart.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
