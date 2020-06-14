@@ -42,10 +42,18 @@ export class MainComponent implements OnInit {
   }
 
   onAddTab(cityName: string) {
-    this.changeTab(cityName);
-    this.storageService.addCity(this.username, cityName);
-    //this.weathers.push(new Weather_data(cityName, `data about this city: ${cityName}`, ));
-    this.getWeatherOf(cityName);
+    let newCity: boolean;
+    newCity = true;
+    this.weathers.forEach(element => {
+        if (element.city.toUpperCase() === cityName.toUpperCase()) {
+          newCity = false;
+        }
+    });
+    if (newCity) {
+      this.changeTab(cityName);
+      this.storageService.addCity(this.username, cityName);
+      this.getWeatherOf(cityName);
+    }
   }
 
   getCurrentWeatherOf(city: string) {
@@ -59,7 +67,6 @@ export class MainComponent implements OnInit {
         this.error.city = city;
         this.error.active = true;
         setTimeout(this.hideError.bind(this), 3000);
-        //alert("Unable to load current weather data of city: " + city  + ". Error message is: " + err.error.message);
         this.changeTab(this.weathers[0].city);
       }
     );
@@ -73,11 +80,11 @@ export class MainComponent implements OnInit {
     this.apiService.getForecast(city).subscribe(
       res => {
         const forecast: number[] = this.apiService.setForecastData(res)
-        let w: Weather_data = this.weathers[this.weathers.length - 1];
-        w.set5DayForecast(forecast);
+        let w: Weather_data = this.weathers.pop();
+        w.forecast = forecast;
+        this.weathers.push(w);
       },
       err => {
-        //alert("Unable to load five day forecast of city: " + city  + ". Error message is: " + err.error.message);
         this.changeTab(this.weathers[0].city);
       }
     );

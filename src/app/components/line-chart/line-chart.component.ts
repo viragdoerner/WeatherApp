@@ -14,16 +14,24 @@ export class LineChartComponent implements OnInit {
       "name": "Germany",
       "series": [
         {
-          "name": "huha",
+          "name": "1",
           "value": 18
         },
         {
-          "name": "2010",
+          "name": "2",
           "value": 20
         },
         {
-          "name": "2011",
+          "name": "3",
           "value": 12
+        },
+        {
+          "name": "4",
+          "value": 10
+        },
+        {
+          "name": "5",
+          "value": 19
         }
       ]
     }

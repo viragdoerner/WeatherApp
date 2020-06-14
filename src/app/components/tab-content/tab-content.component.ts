@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Weather_data} from '../../model/weather_data';
-import {Weather_forecast} from '../../model/weather_forecast';
-import {Weather} from '../../model/weather';
 
 @Component({
   selector: 'app-tab-content',
